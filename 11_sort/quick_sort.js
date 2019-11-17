@@ -20,11 +20,11 @@ function quickSort(arr) {
   return _quickSort(arr, 0, arr.length);
 }
 function _quickSort(arr, start, end) {
-  // console.log(`arr before: ${arr}`)
+  console.log(`arr before: ${arr}`)
   if (end - start <= 1) { return arr }
   const pivotIndex = handlePivot(arr, start, end)
-  // console.log(`pivotIndex: ${pivotIndex}`)
-  // console.log(`arr: ${arr}`)
+  console.log(`pivotIndex: ${pivotIndex}`)
+  console.log(`arr: ${arr}`)
   _quickSort(arr, start, pivotIndex)
   _quickSort(arr, pivotIndex + 1, end)
   return arr
