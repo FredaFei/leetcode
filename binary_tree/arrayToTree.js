@@ -50,19 +50,23 @@ function treeToArray(tree) {
 
 treeToArray(tree)
 
-function arrayToTreeWithLevel(list, parent, level) {
-  const out = []
-  for (let node of list) {
-    if (node.pid == parent) {
+/*
+* 迭代(维基百科)
+* 每一次对过程的重复被称为一次“迭代”，而每一次迭代得到的结果会被用来作为下一次迭代的初始值。
+* */
+function arrayToTreeWithLevel(array, parent, level) {
+  const result = []
+  for (let node of array) {
+    if (node.parent === parent) {
       node.level = level;
-      let children = arrayToTreeWithLevel(list, node.id, level + 1)
+      let children = arrayToTreeWithLevel(array, node.id, level + 1)
       if (children.length) {
         node.children = children
       }
-      out.push(node)
+      result.push(node)
     }
   }
-  return out
+  return result
 }
-var arr = [{id: 1, pid: '-1'},{id: 11, pid: '1'},{id: 12, pid: '1'}]
-arrayToTreeWithLevel(arr, '-1', 0)
+
+arrayToTreeWithLevel([{id: 11, parent: 1}, {id: 12, parent: 1}, {id: 1, parent: -1}], -1, 0)
