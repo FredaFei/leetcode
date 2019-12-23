@@ -119,6 +119,8 @@ traverseRootLast(binaryTree, (value) => {
   result4.unshift(value)
 })
 
+
+
 /**
  * 方法二
  * 前序遍历
@@ -128,6 +130,8 @@ traverseRootLast(binaryTree, (value) => {
  * 3.检测其值右节点存在，存在则 push to stack
  * 4.检测其值左节点存在，存在则 push to stack
  * 5.执行fn （尾部插入 push）
+ *
+ * 参考 https://juejin.im/post/5c8fa09bf265da60f30d3fb3#heading-24
  * */
 const traverseRootFirst = (bTree, fn) => {
   if (!bTree) {return}
