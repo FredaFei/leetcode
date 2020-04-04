@@ -29,7 +29,8 @@ var b = [2, 7, 16, 24]
 sort(a, b)
 
 /**
- * 最大连续子序列和（算法）
+ * 最大连续子序列与和（算法）
+ * 子序列必须包含一个
  * @param {*} arr
  * @return number
  * https://zhuanlan.zhihu.com/p/25848393
@@ -37,19 +38,26 @@ sort(a, b)
 function maxSubArray(arr) {
   var maxSum = 0
   var currentSum = 0
+  var start = 0
+  var end = 0
   for (var i = 0; i < arr.length; i++) {
     currentSum += arr[i]
-    if (currentSum > maxSum) {
-      maxSum = currentSum
-    }
     if (currentSum < 0) {
       currentSum = 0
+      start = i+1
+    }
+    if (currentSum > maxSum) {
+      maxSum = currentSum
+      end = i
     }
   }
-  return maxSum
+  console.log(`start ${start},end ${end}`)
+  if(end-start>=1){
+    return [arr.slice(start,end+1), maxSum]
+  }
 }
 var c = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
-maxSubArray(c) // 6
+maxSubArray(c) // [[4, -1, 2, 1],6]
 
 /**
  * 最大连续子序列和(另外一种写法)
@@ -111,9 +119,8 @@ function changeStr(str) {
     .reduce((a, b) => {
       if (b.charCodeAt() >= 65 && b.charCodeAt() <= 90) {
         return a.concat(['_', b.toLowerCase()])
-      } else {
-        return a.concat([b])
-      }
+      } 
+      return a.concat([b])
     }, [])
     .join('')
     .substr(1)
@@ -122,6 +129,7 @@ function changeStr(str) {
  * 统计一个字符串中出现最多的字符
  */
 function getMaxFrequentStr(str) {
+  str = str.replace(/\s+/g, '')
   const hash = {}
   str.split('').map(s => {
     if (!hash[s]) {
@@ -141,12 +149,13 @@ function getMaxFrequentStr(str) {
   return result
 }
 getMaxFrequentStr('nice to meet you, me too')
+
 /**
  * 找出字符串中连续出现最多的字符和个数
  * 'abcaakjbb' => {'a':2,'b':2}
  */
 function getMaxContinuousStr(str) {
-  const arr = str.match(/(\w)\1*/g)
+  const arr = str.replace(/\s+/g, '').match(/(\w)\1*/g)
   const maxLen = Math.max(...arr.map(s => s.length))
   const result = arr.reduce((pre, curr) => {
     if (curr.length === maxLen) {

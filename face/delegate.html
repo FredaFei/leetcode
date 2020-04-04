@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件代理</title>
+</head>
+
+<body>
+    <div id="app">
+        <ul id="ul">
+            <li>li is click <span>li-span-1</span></li>
+            <li><span>li-span-2</span></li>
+            <li><span>li-span-3</span></li>
+            <li><span>li-span-4</span></li>
+        </ul>
+    </div>
+
+
+    <script>
+        function $(el) {
+            return document.querySelector(el)
+        }
+        // $('ul').addEventListener('click', function(e) {
+        //     if (e.target.tagName.toLowerCase() === 'li') {
+        //         console.log(e.target)
+        //     }
+        // })
+
+        function delegate(element, eventType, selector, fn) {
+            element.addEventListener(eventType, e => {
+                let el = e.target
+                while (!el.matches(selector)) {
+                    if (element === el) {
+                        el = null
+                        break
+                    }
+                    el = el.parentNode
+                }
+                el && fn.call(el, e, el)
+            })
+            return element
+        }
+
+        delegate($('ul'), 'click', 'li', fn)
+
+        function fn(e) {
+            console.log('fn----')
+            console.log(e.target)
+
+        }
+    </script>
+</body>
+
+</html>
