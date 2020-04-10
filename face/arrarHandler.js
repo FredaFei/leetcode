@@ -1,4 +1,4 @@
-/**
+                                                                                                                                                                                                                                            /**
  * 从小到大合并两数组(两数组已经是从小到大排序好了)
  * @param {*} arr1
  * @param {*} arr2
@@ -44,7 +44,7 @@ function maxSubArray(arr) {
     currentSum += arr[i]
     if (currentSum < 0) {
       currentSum = 0
-      start = i+1
+      start = i + 1
     }
     if (currentSum > maxSum) {
       maxSum = currentSum
@@ -52,8 +52,8 @@ function maxSubArray(arr) {
     }
   }
   console.log(`start ${start},end ${end}`)
-  if(end-start>=1){
-    return [arr.slice(start,end+1), maxSum]
+  if (end - start >= 1) {
+    return [arr.slice(start, end + 1), maxSum]
   }
 }
 var c = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
@@ -72,28 +72,10 @@ function maxSubarray(arr) {
   }
   return maxSum
 }
-
-/**
- * 回文判断 方案一
- */
-function isPlalindrome1(str) {
-  if (typeof str !== 'string') {
-    console.warn(`参数 ${str} 不是字符串类型`)
-    return false
-  }
-  const len = str.length
-  const half = len / 2
-  for (var i = 0; i < half; i++) {
-    if (str[i] === str[len - 1 - i]) {
-      return true
-    }
-  }
-  return false
-}
 /**
  * 回文判断 方案二
  */
-function isPlalindrome2(str) {
+function isPlalindrome(str) {
   if (typeof str !== 'string') {
     console.warn(`参数 ${str} 不是字符串类型`)
     return false
@@ -102,9 +84,9 @@ function isPlalindrome2(str) {
   return (
     str2 ===
     str2
-      .split('')
-      .reverse()
-      .join('')
+    .split('')
+    .reverse()
+    .join('')
   )
 }
 /**
@@ -119,11 +101,11 @@ function changeStr(str) {
     .reduce((a, b) => {
       if (b.charCodeAt() >= 65 && b.charCodeAt() <= 90) {
         return a.concat(['_', b.toLowerCase()])
-      } 
+      }
       return a.concat([b])
     }, [])
     .join('')
-    .substr(1)
+    .substring(1)
 }
 /**
  * 统计一个字符串中出现最多的字符
@@ -166,3 +148,29 @@ function getMaxContinuousStr(str) {
   return result
 }
 getMaxContinuousStr('abcbac aaddccc kkk')
+
+/**
+ * 123456 => 123,456
+ * 1234567.92 => 1,234,567.92
+ * 从后往前取
+ */
+function toThousands(number) {
+  var number = (number || 0).toString()
+  var index = number.indexOf('.')
+  var result = ''
+  if (index > -1) {
+    result = number.substring(index)
+    number = number.substring(0, index)
+  }
+  while (number.length > 3) {
+    result = ',' + number.slice(-3) + result
+    number = number.slice(0, number.length - 3)
+  }
+  if (number) {
+    result = number + result
+  }
+  return result
+}
+toThousands(12345)
+toThousands(12345677)
+toThousands(123456.97)
