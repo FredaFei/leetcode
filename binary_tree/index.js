@@ -45,7 +45,7 @@ traverseRootLast(binaryTree, (value) => {
  * 前序遍历
  * 思路：
  * 1.先遍历完左侧的所有节点并依次push to stack，执行fn
- * 2.再依次出pop to stack，并检测右节点有无后代节点（回到53行代码）
+ * 2.再依次出pop to stack，并检测右节点有无后代节点（回到55行代码）
  * 3.stack 全部检测完退出循环，遍历完成
  * */
 const traverseRootFirst = (bTree, fn) => {
@@ -71,7 +71,7 @@ const traverseRootFirst = (bTree, fn) => {
  * 中序遍历
  * 思路：
  * 1.先遍历完左侧的所有节点并依次push to stack
- * 2.再依次出pop to stack，执行fn，并检测右节点有无后代节点（回到53行代码）
+ * 2.再依次出pop to stack，执行fn，并检测右节点有无后代节点（回到81行代码）
  * 3.stack 全部检测完退出循环，遍历完成
  * */
 const traverseRootMiddle = (bTree, fn) => {
