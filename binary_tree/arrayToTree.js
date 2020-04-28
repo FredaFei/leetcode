@@ -12,7 +12,11 @@ const array = [
   {id: 9, name: '前端基础设施组', parent: 5},
   {id: 10, name: '前端业务组', parent: 5}
 ]
-
+/**
+ * 思路：
+ * 1. 创建一个临时tree[]，map{}，遍历数组给每个节点都添加一个children属性
+ * 2. 再次遍历数组，把没有parent属性的节点push to tree，有parent属性，将其作为key
+ * */
 function arrayToTree(array) {
   const tree = []
   const map = {}
@@ -50,7 +54,7 @@ function treeToArray(tree) {
 
 treeToArray(tree)
 
-/*
+/**
 * 迭代(维基百科)
 * 每一次对过程的重复被称为一次“迭代”，而每一次迭代得到的结果会被用来作为下一次迭代的初始值。
 * */
